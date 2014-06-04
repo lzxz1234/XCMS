@@ -25,9 +25,6 @@ public class NutzDao<T> extends AbstractDao<T> {
         try {
             SimpleDataSource ds = new SimpleDataSource();
             ds.setDriverClassName("com.mysql.jdbc.Driver");
-            ds.setJdbcUrl("jdbc:mysql://118.192.46.48:8080/siwei?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8");
-            ds.setUsername("siwei");
-            ds.setPassword("siwei1234");
             dao.setDataSource(ds);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
