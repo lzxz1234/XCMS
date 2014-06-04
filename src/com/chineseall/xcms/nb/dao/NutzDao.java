@@ -15,6 +15,7 @@ import org.nutz.lang.Each;
 import org.nutz.lang.Lang;
 
 import com.chineseall.xcms.core.dao.AbstractDao;
+import com.chineseall.xcms.core.utils.Cfg;
 
 public class NutzDao<T> extends AbstractDao<T> {
 
@@ -23,12 +24,17 @@ public class NutzDao<T> extends AbstractDao<T> {
     private static NutDao dao = new NutDao();
     static {
         try {
-            SimpleDataSource ds = new SimpleDataSource();
-            ds.setDriverClassName("com.mysql.jdbc.Driver");
-            dao.setDataSource(ds);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.exit(0);
+            Cfg cfg = Cfg.getCfg("jdbc.properties");
+            if(cfg != null) {
+                SimpleDataSource ds = new SimpleDataSource();
+                ds.setDriverClassName(cfg.getProperty("driverclass"));
+                ds.setJdbcUrl(cfg.getProperty("jdbcurl"));
+                ds.setUsername(cfg.getProperty("username"));
+                ds.setPassword(cfg.getProperty("password"));
+                dao.setDataSource(ds);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("[jdbc.properties init error]", e);
         }
     }
     
