@@ -5,21 +5,21 @@ import java.util.Map;
 
 import com.chineseall.xcms.core.vo.Req;
 
-public abstract class AbstractDao<T> {
+public abstract class AbstractDao {
     
-    protected Req<T> req;
+    protected Req req;
     
-    public abstract T get(long id);
-    public abstract void add(T target);
+    public abstract Object get(long id);
+    public abstract void add(Object target);
     public abstract void del(long id);
-    public abstract void mod(T target);
-    public abstract List<T> qry(Map<String, String> params);
+    public abstract void mod(Object target);
+    public abstract List<?> qry(Map<String, String> params);
     public abstract int cnt(Map<String, String> params);
     
-    public Req<T> getReq() {
+    public Req getReq() {
         return req;
     }
-    public void setReq(Req<T> req) {
+    public void setReq(Req req) {
         this.req = req;
     }
     

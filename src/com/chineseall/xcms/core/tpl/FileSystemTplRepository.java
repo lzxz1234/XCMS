@@ -39,7 +39,7 @@ public class FileSystemTplRepository extends TplRepository {
         }
     }
     
-    public String getView(Req<?> req, Type type) {
+    public String getView(Req req, Type type) {
         
         try {
             String entityName = req.getEntiryClassName();

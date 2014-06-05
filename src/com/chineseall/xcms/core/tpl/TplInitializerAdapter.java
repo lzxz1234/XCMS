@@ -9,22 +9,22 @@ import com.chineseall.xcms.core.vo.Req;
  */
 public abstract class TplInitializerAdapter {
     
-    public String createAddResultView(Req<?> req) {
+    public String createAddResultView(Req req) {
         return createResultView(req);
     }
-    public String createDelResultView(Req<?> req) {
+    public String createDelResultView(Req req) {
         return createResultView(req);
     }
-    public String createModifyResultView(Req<?> req) {
+    public String createModifyResultView(Req req) {
         return createResultView(req);
     }
     
-    public abstract String createQueryResultView(Req<?> req);
+    public abstract String createQueryResultView(Req req);
     
-    public abstract String createInfoView(Req<?> req);
-    public abstract String createAddFormView(Req<?> req);
-    public abstract String createModifyFormView(Req<?> req);
-    public abstract String createResultView(Req<?> req);
+    public abstract String createInfoView(Req req);
+    public abstract String createAddFormView(Req req);
+    public abstract String createModifyFormView(Req req);
+    public abstract String createResultView(Req req);
     
     public abstract String createIndexView(List<String> symbolList);
 }

@@ -11,9 +11,9 @@ import org.nutz.dao.entity.annotation.Id;
 import com.chineseall.xcms.core.vo.DisField;
 import com.chineseall.xcms.core.vo.Req;
 
-public class NutzReq<T> extends Req<T> {
+public class NutzReq extends Req {
 
-    public NutzReq(String symbolName, Class<T> entityClass) {
+    public NutzReq(String symbolName, Class<?> entityClass) {
         super(symbolName, entityClass);
     }
 

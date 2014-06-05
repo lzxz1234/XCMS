@@ -3,12 +3,12 @@ package com.chineseall.xcms.core.vo;
 import java.util.List;
 import java.util.Map;
 
-public abstract class Req<T> {
+public abstract class Req {
     
     private final String symbolName;
-    private final Class<T> entityClass;
+    private final Class<?> entityClass;
     
-    public Req(String symbolName, Class<T> entityClass) {
+    public Req(String symbolName, Class<?> entityClass) {
         
         this.symbolName = symbolName;
         this.entityClass = entityClass;
@@ -24,7 +24,7 @@ public abstract class Req<T> {
     /**
      * @return 获取后台实体类，为Domain或者Map
      */
-    public Class<T> getEntityClass() {
+    public Class<?> getEntityClass() {
         return entityClass;
     }
     

@@ -17,7 +17,7 @@ import org.nutz.lang.Lang;
 import com.chineseall.xcms.core.dao.AbstractDao;
 import com.chineseall.xcms.core.utils.Cfg;
 
-public class NutzDao<T> extends AbstractDao<T> {
+public class NutzDao extends AbstractDao {
 
     private static final Logger log = Logger.getLogger(NutDao.class);
     
@@ -39,13 +39,13 @@ public class NutzDao<T> extends AbstractDao<T> {
     }
     
     @Override
-    public T get(long id) {
+    public Object get(long id) {
 
         return dao.fetch(this.req.getEntityClass(), id);
     }
     
     @Override
-    public void add(T target) {
+    public void add(Object target) {
         
         dao.insert(target);
     }
@@ -57,13 +57,13 @@ public class NutzDao<T> extends AbstractDao<T> {
     }
 
     @Override
-    public void mod(T target) {
+    public void mod(Object target) {
         
         dao.update(target);
     }
 
     @Override
-    public List<T> qry(Map<String, String> params) {
+    public List<?> qry(Map<String, String> params) {
         
         final SimpleCriteria cnd = Cnd.cri();
         final SqlExpressionGroup where = cnd.where();

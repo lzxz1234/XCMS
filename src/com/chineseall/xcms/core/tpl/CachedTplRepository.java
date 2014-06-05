@@ -20,7 +20,7 @@ public class CachedTplRepository extends TplRepository {
     }
     
     @Override
-    public String getView(Req<?> req, Type type) {
+    public String getView(Req req, Type type) {
 
         if(req == null || type == null) return "";
 

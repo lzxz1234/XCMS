@@ -38,7 +38,7 @@ public class ViewInitializer extends TplInitializerAdapter {
     }
     
     @Override
-    public String createInfoView(Req<?> req) {
+    public String createInfoView(Req req) {
         
         try {
             String tplString = loadFromResource("info.html");
@@ -53,7 +53,7 @@ public class ViewInitializer extends TplInitializerAdapter {
     }
     
     @Override
-    public String createAddFormView(Req<?> req) {
+    public String createAddFormView(Req req) {
         
         try {
             String tplString = loadFromResource("create.html");
@@ -68,7 +68,7 @@ public class ViewInitializer extends TplInitializerAdapter {
     }
 
     @Override
-    public String createModifyFormView(Req<?> req) {
+    public String createModifyFormView(Req req) {
         
         try {
             String tplString = loadFromResource("modify.html");
@@ -83,7 +83,7 @@ public class ViewInitializer extends TplInitializerAdapter {
     }
 
     @Override
-    public String createQueryResultView(Req<?> req) {
+    public String createQueryResultView(Req req) {
         
         try {
             String tplString = loadFromResource("query-result.html");
@@ -99,7 +99,7 @@ public class ViewInitializer extends TplInitializerAdapter {
     }
 
     @Override
-    public String createResultView(Req<?> req) {
+    public String createResultView(Req req) {
 
         return "操作成功 ！！！";
     }

@@ -39,7 +39,7 @@ public class NutzProcessor implements Processor {
     public String renderObjInfo(String domainSymbol, long params)
             throws Exception {
         
-        Req<Object> req = getReq(domainSymbol);
+        Req req = getReq(domainSymbol);
         Object queryObject = daoFactory.getDao(req).get(params);
         if(queryObject == null) throw new Http404Exception();
         
@@ -54,7 +54,7 @@ public class NutzProcessor implements Processor {
     @Override
     public String renderAddForm(String domainSymbol) throws Exception {
         
-        Req<Object> req = getReq(domainSymbol);
+        Req req = getReq(domainSymbol);
         Map<String, Object> resultContext = new HashMap<String, Object>();
         resultContext.put("fieldList", req.getDetailFields());
         resultContext.put("domainSymbol", domainSymbol);
@@ -66,7 +66,7 @@ public class NutzProcessor implements Processor {
     public String doAddAction(String domainSymbol, Map<String, Object> params)
             throws Exception {
         
-        Req<Object> req = getReq(domainSymbol);
+        Req req = getReq(domainSymbol);
         Object entity = Lang.map2Object(params, req.getEntityClass());
         daoFactory.getDao(req).add(entity);
         Map<String, Object> resultContext = new HashMap<String, Object>();
@@ -77,7 +77,7 @@ public class NutzProcessor implements Processor {
     @Override
     public String doDelAction(String domainSymbol, long id) throws Exception {
         
-        Req<Object> req = getReq(domainSymbol);
+        Req req = getReq(domainSymbol);
         daoFactory.getDao(req).del(id);
         Map<String, Object> resultContext = new HashMap<String, Object>();
         Ctx.translate(new Trs2Map(resultContext));
@@ -89,7 +89,7 @@ public class NutzProcessor implements Processor {
  
         if(Strings.isEmpty(domainSymbol)) return "";
         
-        Req<Object> req = new NutzReq<>(domainSymbol, classMapper.findClass(domainSymbol));
+        Req req = new NutzReq(domainSymbol, classMapper.findClass(domainSymbol));
         Object queryObject = daoFactory.getDao(req).get(params);
         if(queryObject == null) throw new Http404Exception();
         
@@ -106,7 +106,7 @@ public class NutzProcessor implements Processor {
     public String doModifyAction(String domainSymbol, long id, Map<String, Object> params)
             throws Exception {
         
-        Req<Object> req = new NutzReq<>(domainSymbol, classMapper.findClass(domainSymbol));
+        Req req = new NutzReq(domainSymbol, classMapper.findClass(domainSymbol));
         Object modifyObject = daoFactory.getDao(req).get(id);
         if(modifyObject == null) throw new Http404Exception();
         
@@ -122,7 +122,7 @@ public class NutzProcessor implements Processor {
     public String doQueryAction(String domainSymbol, Map<String, String> params)
             throws Exception {
         
-        Req<Object> req = new NutzReq<>(domainSymbol, classMapper.findClass(domainSymbol));
+        Req req = new NutzReq(domainSymbol, classMapper.findClass(domainSymbol));
         Map<String, Object> resultContext = new HashMap<String, Object>();
         resultContext.put("domainSymbol", domainSymbol);
         resultContext.put("idList", req.getIdFields());
@@ -154,11 +154,11 @@ public class NutzProcessor implements Processor {
         return queryString.toString();
     }
     
-    private <T> Req<T> getReq(String domainSymbol) {
+    private Req getReq(String domainSymbol) {
         
-        Class<T> entityClass = classMapper.findClass(domainSymbol);
+        Class<?> entityClass = classMapper.findClass(domainSymbol);
         if(entityClass == null) throw new Http404Exception();
-        return new NutzReq<T>(domainSymbol, entityClass);
+        return new NutzReq(domainSymbol, entityClass);
     }
     
     private static class Trs2Map implements Trs {

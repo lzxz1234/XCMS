@@ -10,12 +10,13 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ClassMapper {
 
+    private Class<?> defaultClass;
     private Map<String, Class<?>> domainMaps = new ConcurrentHashMap<String, Class<?>>();
     
-    @SuppressWarnings("unchecked")
-    public <T> Class<T> findClass(String symbolName) {
+    public Class<?> findClass(String symbolName) {
         
-        return (Class<T>) domainMaps.get(symbolName);
+        Class<?> result = domainMaps.get(symbolName);
+        return result == null ? defaultClass : result;
     }
     
     public List<String> getAllClassSymbols() {
@@ -28,4 +29,8 @@ public class ClassMapper {
         domainMaps.put(symbolName, clazz);
     }
     
+    public void setDefaultClass(Class<?> defaultClass) {
+        
+        this.defaultClass = defaultClass;
+    }
 }
