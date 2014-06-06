@@ -12,7 +12,7 @@ for(field in fieldList) {
 %>
 <div class="form-group col-lg-2">
     <label class="sr-only" for="S_${field.symbolName}">${field.disName}</label>
-    <input id='S_${field.symbolName}' name='[EQ]${field.symbolName}' type='text' class='input-sm form-control' value='\${${field.symbolName} !}' placeholder="${field.disName}">
+    <input id='S_${field.symbolName}' name='_EQ_${field.symbolName}' type='text' class='input-sm form-control' value='\${_EQ_${field.symbolName} !}' placeholder="${field.disName}">
 </div>
 <%
 }

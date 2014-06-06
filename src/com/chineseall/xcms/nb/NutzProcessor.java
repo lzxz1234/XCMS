@@ -123,7 +123,7 @@ public class NutzProcessor implements Processor {
             throws Exception {
         
         Req req = new NutzReq(domainSymbol, classMapper.findClass(domainSymbol));
-        Map<String, Object> resultContext = new HashMap<String, Object>();
+        Map<String, Object> resultContext = new HashMap<String, Object>(params);
         resultContext.put("domainSymbol", domainSymbol);
         resultContext.put("idList", req.getIdFields());
         resultContext.put("fieldList", req.getSummaryFields());

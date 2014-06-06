@@ -74,17 +74,17 @@ public class NutzDao extends AbstractDao {
                 public void invoke(int indx, Entry<String, String> ele, int len){
                     String key = ele.getKey();
                     String value = ele.getValue();
-                    if(key.startsWith("[GT]") && value.length() > 0) 
+                    if(key.startsWith("_GT_") && value.length() > 0) 
                         where.andGT(key.substring(4), Long.parseLong(value));
-                    else if(key.startsWith("[LT]") && value.length() > 0)
+                    else if(key.startsWith("_LT_") && value.length() > 0)
                         where.andLT(key.substring(4), Long.parseLong(value));
-                    else if(key.startsWith("[EQ]") && value.length() > 0)
+                    else if(key.startsWith("_EQ_") && value.length() > 0)
                         where.andEquals(key.substring(4), value);
-                    else if(key.startsWith("[LK]") && value.length() > 0)
+                    else if(key.startsWith("_LK_") && value.length() > 0)
                         where.andLike(key.substring(4), value);
-                    else if(key.startsWith("[ASC]") && value.length() > 0)
+                    else if(key.startsWith("_ASC_") && value.length() > 0)
                         cnd.asc(key.substring(5));
-                    else if(key.startsWith("[DSC]") && value.length() > 0)
+                    else if(key.startsWith("_DSC_") && value.length() > 0)
                         cnd.desc(key.substring(5));
                     else if(key.equals("pageSize"))
                         cnd.getPager().setPageSize(Integer.parseInt(value));
@@ -110,17 +110,17 @@ public class NutzDao extends AbstractDao {
                 public void invoke(int indx, Entry<String, String> ele, int len){
                     String key = ele.getKey();
                     String value = ele.getValue();
-                    if(key.startsWith("[GT]") && value.length() > 0) 
+                    if(key.startsWith("_GT_") && value.length() > 0) 
                         where.andGT(key.substring(4), Long.parseLong(value));
-                    else if(key.startsWith("[LT]") && value.length() > 0)
+                    else if(key.startsWith("_LT_") && value.length() > 0)
                         where.andLT(key.substring(4), Long.parseLong(value));
-                    else if(key.startsWith("[EQ]") && value.length() > 0)
+                    else if(key.startsWith("_EQ_") && value.length() > 0)
                         where.andEquals(key.substring(4), value);
-                    else if(key.startsWith("[LK]") && value.length() > 0)
+                    else if(key.startsWith("_LK_") && value.length() > 0)
                         where.andLike(key.substring(4), value);
-                    else if(key.startsWith("[ASC]") && value.length() > 0)
+                    else if(key.startsWith("_ASC_") && value.length() > 0)
                         cnd.asc(key.substring(5));
-                    else if(key.startsWith("[DSC]") && value.length() > 0)
+                    else if(key.startsWith("_DSC_") && value.length() > 0)
                         cnd.desc(key.substring(5));
                 }
             });
