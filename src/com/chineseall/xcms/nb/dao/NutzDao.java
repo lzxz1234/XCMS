@@ -21,7 +21,7 @@ public class NutzDao extends AbstractDao {
 
     private static final Logger log = Logger.getLogger(NutDao.class);
     
-    private static NutDao dao = new NutDao();
+    static NutDao dao = new NutDao();
     static {
         try {
             Cfg cfg = Cfg.getCfg("jdbc.properties");

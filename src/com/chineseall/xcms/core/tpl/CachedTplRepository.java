@@ -1,8 +1,8 @@
 package com.chineseall.xcms.core.tpl;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
+import com.chineseall.xcms.core.utils.CacheUtil;
 import com.chineseall.xcms.core.vo.Req;
 
 /**
@@ -11,7 +11,7 @@ import com.chineseall.xcms.core.vo.Req;
 public class CachedTplRepository extends TplRepository {
 
     private final int AvaliableTime = 5 * 60 * 1000;
-    private ConcurrentHashMap<String, CacheHolder> viewCache = new ConcurrentHashMap<String, CacheHolder>();
+    private CacheUtil<String, String> viewCache = new CacheUtil<>(AvaliableTime);
     private final TplRepository realViewRepository;
     
     public CachedTplRepository(TplRepository realViewRepository) {
@@ -24,27 +24,14 @@ public class CachedTplRepository extends TplRepository {
 
         if(req == null || type == null) return "";
 
-        String entityName = req.getEntiryClassName();
+        String entityName = req.getEntityClassName();
         String viewIdentifier = entityName + "@" + type;
-        CacheHolder result = viewCache.get(viewIdentifier);
-        if(result == null || System.currentTimeMillis() - result.time > AvaliableTime) {
-            result = new CacheHolder(realViewRepository.getView(req, type));
-            if(result.content != null) viewCache.put(viewIdentifier, result);
+        String result = viewCache.get(viewIdentifier);
+        if(result == null) {
+            result = realViewRepository.getView(req, type);
+            if(result != null) viewCache.put(viewIdentifier, result);
         }
-        return result.content;
-    }
-
-    private static class CacheHolder {
-        final String content;
-        final long time;
-        
-        CacheHolder(String content) {
-            this(System.currentTimeMillis(), content);
-        }
-        CacheHolder(long time, String content) {
-            this.content = content;
-            this.time = time;
-        }
+        return result;
     }
 
     @Override

@@ -31,8 +31,8 @@ public abstract class Req {
     /**
      * @return 查询实体类名称，为DomainName或者symbolName
      */
-    public String getEntiryClassName() {
-        return entityClass.isAssignableFrom(Map.class) ? symbolName : entityClass.getName();
+    public String getEntityClassName() {
+        return Map.class.isAssignableFrom(entityClass) ? symbolName : entityClass.getName();
     }
     
     public List<DisField> getCreateFields() {

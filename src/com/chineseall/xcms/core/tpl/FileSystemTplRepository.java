@@ -42,7 +42,7 @@ public class FileSystemTplRepository extends TplRepository {
     public String getView(Req req, Type type) {
         
         try {
-            String entityName = req.getEntiryClassName();
+            String entityName = req.getEntityClassName();
             String resourceLocation = rootPath + entityName + "-" + type + ".html";
             String result = getView(resourceLocation);
             if(isEmpty(result)) {

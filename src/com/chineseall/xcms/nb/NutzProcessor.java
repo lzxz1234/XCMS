@@ -103,6 +103,7 @@ public class NutzProcessor implements Processor {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public String doModifyAction(String domainSymbol, long id, Map<String, Object> params)
             throws Exception {
         
@@ -110,7 +111,11 @@ public class NutzProcessor implements Processor {
         Object modifyObject = daoFactory.getDao(req).get(id);
         if(modifyObject == null) throw new Http404Exception();
         
-        Lang.map2Object(params, modifyObject);
+        if(modifyObject instanceof Map)
+            ((Map<String, Object>)modifyObject).putAll(params);
+        else
+            Lang.map2Object(params, modifyObject);
+        
         daoFactory.getDao(req).mod(modifyObject);
         
         Map<String, Object> resultContext = new HashMap<String, Object>();

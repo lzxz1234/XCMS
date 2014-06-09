@@ -1,6 +1,7 @@
 package com.chineseall.xcms.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ClassMapper {
 
-    private Class<?> defaultClass;
+    private Class<?> defaultClass = HashMap.class;
     private Map<String, Class<?>> domainMaps = new ConcurrentHashMap<String, Class<?>>();
     
     public Class<?> findClass(String symbolName) {

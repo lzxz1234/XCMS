@@ -46,6 +46,16 @@
 
 在包 `com.chineseall.xcms.nb.tpl` 中包含 create.html, index.html, info.html, modify.html 和 query-result.html，此模板作用为当TplRepository中找不到对应模板时该模板生成，修改整个系统的界面时修改此处模板。
 
+### 快捷更新 ###
+**自定义SQL** 支持虚拟类型以实现自定义SQL快速更新少量字段，基本配置如下：
+
+	class2Dao.properties:
+	quick-set-workflow=com.chineseall.xcms.nb.dao.QuickSetDao
+	custsql.properties:
+	quick-set-workflow=update s_resource set status = ${status} where id = ${id}
+	
+配置完成浏览器直接访问：http://domain.com/mod/quick-set-workflow/26?id=26&status=1 即可。
+
 ### 模板语法 ###
 模板基本语法参考 [Beetl](https://github.com/javamonkey/beetl2.0 "Beetl")。
 
@@ -55,9 +65,9 @@
 
 name 属性前半部分可以指定后台具体查询操作
 
-- _GT_ GreateThan
-- _LT_ LittleThan
-- _EQ_ Equal
-- _LK_ Like 
-- _ASC_ 非查询，用于排序，此时value随便，排序列为[ASC]后紧跟部分
-- _DSC_ 非查询，用于排序，此时value随便，排序列为[DSC]后紧跟部分
+- \_GT_ GreateThan
+- \_LT_ LittleThan
+- \_EQ_ Equal
+- \_LK_ Like 
+- \_ASC_ 非查询，用于排序，此时value随便，排序列为[ASC]后紧跟部分
+- \_DSC_ 非查询，用于排序，此时value随便，排序列为[DSC]后紧跟部分

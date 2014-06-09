@@ -11,7 +11,7 @@ public class DaoFactory {
     
     public AbstractDao getDao(Req req) {
         
-        String daoClass = cfg.getProperty(req.getEntiryClassName(), defaultDaoClass);
+        String daoClass = cfg.getProperty(req.getEntityClassName(), defaultDaoClass);
         AbstractDao result;
         try {
             result = (AbstractDao) Class.forName(daoClass).newInstance();
