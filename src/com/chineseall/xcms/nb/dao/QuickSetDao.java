@@ -31,7 +31,7 @@ public class QuickSetDao extends NutzDao {
 
     @Override
     public void del(long id) {
-        
+         
     }
 
     @Override
