@@ -1,5 +1,8 @@
 package com.chineseall.xcms.nb;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +25,10 @@ import com.chineseall.xcms.core.ClassMapper;
 import com.chineseall.xcms.core.dao.DaoFactory;
 import com.chineseall.xcms.core.tpl.FileSystemTplRepository;
 import com.chineseall.xcms.core.tpl.TplRepository;
+import com.chineseall.xcms.core.utils.Cfg;
 import com.chineseall.xcms.core.utils.Ctx;
+import com.chineseall.xcms.core.utils.StringTemplate;
+import com.chineseall.xcms.core.utils.StringTemplate.ReplaceHolder;
 import com.chineseall.xcms.nb.MainModule.CtxFilter;
 import com.chineseall.xcms.nb.render.BeetlRender;
 import com.chineseall.xcms.nb.tpl.ViewInitializer;
@@ -36,12 +42,25 @@ public class MainModule {
     
     public MainModule() {
         
+        Cfg cfg = Cfg.getCfg("/xcms.properties");
+        String defaultDao = cfg.getProperty("DEFAULT_DAO", "com.chineseall.xcms.nb.dao.NutzDao");
+        String domainPackage = cfg.getProperty("DOMAIN_PACKAGE");
+        String tplLocation = cfg.getProperty("TPL_REPOSITORY");
+        tplLocation = StringTemplate.compile(tplLocation).replace(new ReplaceHolder() {
+            @Override
+            public String get(String key) {
+                if("web-content".equalsIgnoreCase(key))
+                    return MainModule.this.getWebInfPath();
+                return null;
+            }
+        });
+        
         ClassMapper classMapper = new ClassMapper(); 
         DaoFactory daoFactory = new DaoFactory();
-        daoFactory.setDefaultDaoClass("com.chineseall.xcms.nb.dao.NutzDao");
-        for(Class<?> clazz : Scans.me().scanPackage("com.siwei.domain"))
+        daoFactory.setDefaultDaoClass(defaultDao);
+        for(Class<?> clazz : Scans.me().scanPackage(domainPackage))
             classMapper.putClass(clazz.getSimpleName().toLowerCase(), clazz);
-        TplRepository templateFactory = new FileSystemTplRepository("d:\\template", new ViewInitializer());
+        TplRepository templateFactory = new FileSystemTplRepository(tplLocation, new ViewInitializer());
         
         processor.setClassMapper(classMapper);
         processor.setDaoFactory(daoFactory);
@@ -136,4 +155,37 @@ public class MainModule {
             return null;
         }
     }
+    
+    private String getWebInfPath(){
+        
+        URL url = getClass().getProtectionDomain().getCodeSource().getLocation();
+        String path = url.toString();
+        int index = path.indexOf("WEB-INF");
+        
+        if(index == -1){
+            index = path.indexOf("classes");
+        }
+        
+        if(index == -1){
+            index = path.indexOf("bin");
+        }
+        
+        path = path.substring(0, index);
+        
+        if(path.startsWith("zip")){//当class文件在war中时，此时返回zip:D:/...这样的路径
+            path = path.substring(4);
+        }else if(path.startsWith("file")){//当class文件在class文件中时，此时返回file:/D:/...这样的路径
+            path = path.substring(6);
+        }else if(path.startsWith("jar")){//当class文件在jar文件里面时，此时返回jar:file:/D:/...这样的路径
+            path = path.substring(10); 
+        }
+        try {
+            path =  URLDecoder.decode(path, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        
+        return path;
+    }
+
 }
