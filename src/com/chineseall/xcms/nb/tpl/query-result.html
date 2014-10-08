@@ -6,7 +6,7 @@
     <a href="#" onclick='javascript: $("#query-form").toggle("fast"); return false;'><span class="label label-primary">高级检索</span></a>
   </div>
 </ol>
-<form id="query-form" method='POST' action='${webroot!}/qry/\${domainSymbol}' class="form-inline well well-sm" style="display: none;" enctype='application/x-www-form-urlencoded' role="form">
+<form id="query-form" method='POST' action='\${webroot!}/qry/\${domainSymbol}' class="form-inline well well-sm" style="display: none;" enctype='application/x-www-form-urlencoded' role="form">
 <%
 for(field in fieldList) {
 %>
