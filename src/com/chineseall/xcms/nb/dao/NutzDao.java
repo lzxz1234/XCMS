@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.impl.NutDao;
-import org.nutz.dao.impl.SimpleDataSource;
 import org.nutz.dao.pager.Pager;
 import org.nutz.dao.util.cri.SimpleCriteria;
 import org.nutz.dao.util.cri.SqlExpressionGroup;
@@ -16,6 +15,7 @@ import org.nutz.lang.Lang;
 
 import com.chineseall.xcms.core.dao.AbstractDao;
 import com.chineseall.xcms.core.utils.Cfg;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class NutzDao extends AbstractDao {
 
@@ -26,10 +26,10 @@ public class NutzDao extends AbstractDao {
         try {
             Cfg cfg = Cfg.getCfg("jdbc.properties");
             if(cfg != null) {
-                SimpleDataSource ds = new SimpleDataSource();
-                ds.setDriverClassName(cfg.getProperty("driverclass"));
+                ComboPooledDataSource ds = new ComboPooledDataSource();
+                ds.setDriverClass(cfg.getProperty("driverclass"));
                 ds.setJdbcUrl(cfg.getProperty("jdbcurl"));
-                ds.setUsername(cfg.getProperty("username"));
+                ds.setUser(cfg.getProperty("username"));
                 ds.setPassword(cfg.getProperty("password"));
                 dao.setDataSource(ds);
             }
