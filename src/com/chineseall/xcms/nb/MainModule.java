@@ -38,9 +38,9 @@ import com.chineseall.xcms.nb.tpl.ViewInitializer;
 @Encoding(input="UTF-8", output="UTF-8")
 public class MainModule {
 
-    private NutzProcessor processor = new NutzProcessor();
+    private static NutzProcessor processor = new NutzProcessor();
     
-    public MainModule() {
+    static {
         
         Cfg cfg = Cfg.getCfg("/xcms.properties");
         String defaultDao = cfg.getProperty("DEFAULT_DAO", "com.chineseall.xcms.nb.dao.NutzDao");
@@ -50,7 +50,7 @@ public class MainModule {
             @Override
             public String get(String key) {
                 if("web-content".equalsIgnoreCase(key))
-                    return MainModule.this.getWebInfPath();
+                    return MainModule.getWebInfPath();
                 return null;
             }
         });
@@ -156,9 +156,9 @@ public class MainModule {
         }
     }
     
-    private String getWebInfPath(){
+    private static String getWebInfPath(){
         
-        URL url = getClass().getProtectionDomain().getCodeSource().getLocation();
+        URL url = MainModule.class.getProtectionDomain().getCodeSource().getLocation();
         String path = url.toString();
         int index = path.indexOf("WEB-INF");
         
