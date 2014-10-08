@@ -92,7 +92,7 @@ public class NutzDao extends AbstractDao {
                         cnd.getPager().setPageNumber(Integer.parseInt(value));
                     else if(value.length() == 0)
                         log.debug(String.format("[无效的参数：%s-%s]", key, value));
-                    else 
+                    else if(!"_".equals(key))//不打印ajax提交中的时间参数
                         log.info(String.format("[不可识别的参数：%s-%s]", key, value));
                 }
             });

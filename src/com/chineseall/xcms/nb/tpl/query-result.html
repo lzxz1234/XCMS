@@ -45,20 +45,20 @@ for(field in fieldList) {
           %>
           
           <td>
-  <a href="${webroot}/get/\${domainSymbol}/<% for(id in idList) { 
+  <a href="\${webroot}/get/\${domainSymbol}/<% for(id in idList) { 
                                                %>\${@idList.get(${idLP.index - 1}).getValue(obj)}<% 
                                                  if(idLP.index < idLP.size - 1) {
                                                     %>,<%
                                                  }
                                               } 
                                            %>" data-toggle="tooltip" title="详情"><span class="glyphicon glyphicon-info-sign"></span></a>
-  <a href="${webroot}/mod-form/\${domainSymbol}/<% for(id in idList) { 
+  <a href="\${webroot}/mod-form/\${domainSymbol}/<% for(id in idList) { 
                                                %>\${@idList.get(${idLP.index - 1}).getValue(obj)}<% 
                                                  if(idLP.index < idLP.size - 1) {
                                                     %>,<%
                                                  }
                                               } %>" data-toggle="tooltip" title="修改"><span class="glyphicon glyphicon-edit"></span></a>
-  <a href="${webroot}/del/\${domainSymbol}/<% for(id in idList) { 
+  <a href="\${webroot}/del/\${domainSymbol}/<% for(id in idList) { 
                                                %>\${@idList.get(${idLP.index - 1}).getValue(obj)}<% 
                                                  if(idLP.index < idLP.size - 1) {
                                                     %>,<%
