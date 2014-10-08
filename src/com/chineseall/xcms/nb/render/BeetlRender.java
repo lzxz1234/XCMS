@@ -15,9 +15,7 @@ public class BeetlRender implements Render {
 
     private GroupTemplate group = new GroupTemplate();
     {
-        group.setTempFolder("D:\\template\\cache");
         group.enableNativeCall();
-        group.enableOptimize();
     }
     
     @Override
