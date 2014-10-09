@@ -23,6 +23,9 @@ public class IOUtils {
     
     public static void toFile(File target, String content, String charset) throws IOException {
         
+        File parent = target.getParentFile();
+        if(!parent.exists()) parent.mkdirs();
+        
         FileOutputStream fos = new FileOutputStream(target);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         try {
