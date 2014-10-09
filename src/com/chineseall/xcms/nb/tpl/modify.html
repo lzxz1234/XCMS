@@ -1,10 +1,10 @@
 <ol class="breadcrumb">
   <li>Home</li>
-  <li>\${domainSymbol}</li>
+  <li>${domainSymbol}</li>
   <li class="active">修改</li>
 </ol>
 <div class="well well-sm">
-  <form method='POST' action='${webroot}/mod/\${domainSymbol}/\${id}' class='form-horizontal' enctype='application/x-www-form-urlencoded'>
+  <form method='POST' action='\${webroot}/mod/\${domainSymbol}/\${id}' class='form-horizontal' enctype='application/x-www-form-urlencoded'>
   <%
   for(field in fieldList) {
   %>
