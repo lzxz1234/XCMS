@@ -6,13 +6,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.nutz.resource.Scans;
+
 /**
  * SymbolName到真实类对应关系
  */
 public class ClassMapper {
 
+    private String domainPackage;
+    
     private Class<?> defaultClass = HashMap.class;
     private Map<String, Class<?>> domainMaps = new ConcurrentHashMap<String, Class<?>>();
+    
+    public void init() {
+        
+        for(Class<?> clazz : Scans.me().scanPackage(domainPackage))
+            this.putClass(clazz.getSimpleName().toLowerCase(), clazz);
+    }
     
     public Class<?> findClass(String symbolName) {
         

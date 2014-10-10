@@ -142,7 +142,7 @@ public class NutzProcessor implements Processor {
         Ctx.translate(new Trs2Map(resultContext));
         return render.reader(tplRepository.getQueryResultView(req), resultContext);
     }
-
+    
     private String parseIntoQueryString(Map<String, String> params) {
         
         StringBuilder queryString = new StringBuilder();
@@ -177,19 +177,6 @@ public class NutzProcessor implements Processor {
             this.map.put(key, value);
         }
         
-    }
-    
-    public void setClassMapper(ClassMapper classMapper) {
-        this.classMapper = classMapper;
-    }
-    public void setDaoFactory(DaoFactory daoFactory) {
-        this.daoFactory = daoFactory;
-    }
-    public void setTplFactory(TplRepository tplRepository) {
-        this.tplRepository = tplRepository;
-    }
-    public void setRender(Render render) {
-        this.render = render;
     }
     
 }

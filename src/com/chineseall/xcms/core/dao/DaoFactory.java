@@ -3,7 +3,6 @@ package com.chineseall.xcms.core.dao;
 import com.chineseall.xcms.core.utils.Cfg;
 import com.chineseall.xcms.core.vo.Req;
 
-
 public class DaoFactory {
     
     private Cfg cfg = Cfg.getCfg("class2dao.properties");
@@ -20,10 +19,6 @@ public class DaoFactory {
         }
         result.setReq(req);
         return (AbstractDao)result;
-    }
-    
-    public void setDefaultDaoClass(String defaultDaoClass) {
-        this.defaultDaoClass = defaultDaoClass;
     }
     
 }
