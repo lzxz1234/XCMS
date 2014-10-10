@@ -40,9 +40,15 @@ public class Ctx {
         getCtx().put(key, value);
     }
     
-    public static void get(String key) {
+    public static Object get(String key) {
         
-        getCtx().get(key);
+        return getCtx().get(key);
+    }
+    
+    @SuppressWarnings("unchecked")
+    public static <T> T get(Class<T> clazz, String key) {
+        
+        return (T)get(key);
     }
     
     public static void translate(Trs target) {

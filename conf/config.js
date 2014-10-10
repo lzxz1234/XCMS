@@ -8,7 +8,7 @@ var ioc={
 						create: "init",
 					},
 					fields: {
-						domainPackage: "com.siwei.domain",
+						domainPackage: "com.chn.xietong.web.domain",
 					}
 				},
 				daoFactory: {
@@ -34,4 +34,25 @@ var ioc={
 				}
 			}
 		},
+		tmpFilePool : {
+		    type : 'org.nutz.filepool.NutFilePool',
+		    args : [ {java: 'com.chineseall.xcms.core.utils.WebUtils.getWebInfPath("/temp")'}, 
+		             1000 ]
+		},
+		uploadFileContext : {
+		    type : 'org.nutz.mvc.upload.UploadingContext',
+		    singleton : false,
+		    args : [ { refer : 'tmpFilePool' } ],
+		    fields : {
+		        ignoreNull : true,
+		        // 单个文件最大尺寸(大约的值，单位为字节，即 1048576 为 1M)
+		        maxFileSize : 1048576,
+		        nameFilter : '^(.+[.])(gif|jpg|png)$' 
+		    } 
+		},
+		myUpload : {
+		    type : 'org.nutz.mvc.upload.UploadAdaptor',
+		    singleton : false,
+		    args : [ { refer : 'uploadFileContext' } ] 
+		}
 };
