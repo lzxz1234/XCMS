@@ -73,6 +73,7 @@
         'onComplete': function(response) {
         	$('#status').addClass("glyphicon glyphicon-ok");
             $("#fileinsession").val(response.file);
+            $("#file").attr("disabled", "disabled");
         },
         'onCancel': function() {
         }
