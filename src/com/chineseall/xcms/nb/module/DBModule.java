@@ -52,7 +52,6 @@ public class DBModule {
     }
     
     @At("/mod/?/?")
-    @POST
     @Ok("raw:html")
     public String doMod(String classSymbol, long id, @Param("..") Map<String, Object> map) 
             throws Exception {
