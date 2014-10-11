@@ -40,7 +40,8 @@ for(field in fieldList) {
   %>
       <tr><%
           for(field in fieldList) {
-          %><td for="${field.disName}">\${@fieldList.get(${fieldLP.index - 1}).getValue(obj)}</td><%
+          %><td for="${field.disName}">\${@fieldList.get(${fieldLP.index - 1}).getValue(obj)}</td>
+          <%
           }
           %>
           
