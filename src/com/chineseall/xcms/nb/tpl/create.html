@@ -35,13 +35,13 @@ $(function() {
         
         v.parentsUntil(".form-group").addClass("has-feedback");
         v.ajaxfileupload({
-            'action': '\${webroot!}/upload/',
+            'action': '${webroot!}/upload/',
               'validate_extensions': false,
               'onStart': function() {
               },
               'onComplete': function(response) {
                   v.after("<span id=\"" + suffix + "process\" class=\"form-control-feedback glyphicon glyphicon-ok\"></span>");
-                  v.after("<input id='imgInSession' name='" + suffix + "InSession' type='hidden' value='" + response.icon + "'>");
+                  v.after("<input id='imgInSession' name='" + suffix + "InSession' type='hidden' value='" + eval("response."+v.attr("name")) + "'>");
                   v.attr("disabled", "disabled");
               },
               'onCancel': function() {
