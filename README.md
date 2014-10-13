@@ -59,29 +59,11 @@
 配置完成浏览器直接访问：http://domain.com/mod/quick-set-workflow/26?id=26&status=1 即可。
 
 ### 文件上传 ###
+文件上传基本流程为，表单中的 `file` 类型字段会被 js 接管，选择文件后直接在后台上传，完成后在输入框后显示完成标志，同时在表单中添加 `[name]InSession` 隐藏字段，值为文件传到服务器后保存在 `session` 中的基本信息键，后续处理时可以从 `session` 中获取。
+
 发往地址 `/upload/` 的文件会被临时保存到 webroot 下的 temp 文件夹下，然后把  `org.nutz.mvc.upload.TempFile` 类型的文件对象放到 session 中，同时把 key 以 json 的形式返回到客户端。
 
-例：
-
-	<input type="file" id="file" /><span id="status"></span>
-
-    $('#file').ajaxfileupload({
-        'action': './upload/',
-        'validate_extensions': false,
-        'onStart': function() {
-        },
-        'onComplete': function(response) {
-        	$('#status').addClass("glyphicon glyphicon-ok");
-            $("#fileinsession").val(response.file);
-            $("#file").attr("disabled", "disabled");
-        },
-        'onCancel': function() {
-        }
-    });
-
-附返回格式：
-
-    {"file": "12f75752-358c-4787-abe9-d90a0f1639ae"}
+附例：[AutoSolveFileDao](https://gist.github.com/lzxz1234/f6253ae3a0f79ed33061 "AutoSolveFileDao")
 
 ### 模板语法 ###
 模板基本语法参考 [Beetl](https://github.com/javamonkey/beetl2.0 "Beetl")。
