@@ -57,6 +57,9 @@ footer {
 .bs-sidebar .nav > .active > ul {
     display: block;
 }
+img {
+    height: 100% !important;
+}
     </style>
   </head>
   <body>
@@ -120,31 +123,33 @@ for(symbol in symbolList) {
     <script src="./jquery.ajaxupload.js"></script>
     <script type="text/javascript">
     $(function() {
-    	$(".bs-sidenav li").click(function() {
-    		$(this).siblings("li").removeClass("active");
-    		$(this).addClass("active");
-    	});
-    	$(".bs-sidenav a[href][href!='#']").click(function() {
-    		$(this).parent("li").siblings("li").removeClass("active");
+        $(".bs-sidenav li").click(function() {
+            $(this).siblings("li").removeClass("active");
+            $(this).addClass("active");
+        });
+        $(".bs-sidenav a[href][href!='#']").click(function() {
+            $(this).parent("li").siblings("li").removeClass("active");
             $(this).parent("li").addClass("active");
-    		return ajaxLoadContent($(this).attr("href"));
-    	});
+            return ajaxLoadContent($(this).attr("href"));
+        });
     });
     function ajaxLoadContent(url) {
-    	$("#content").html("loading...");
+        $("#content").html("loading...");
         $.ajax({
             url: encodeURI(url), 
             async: false,
             cache: false,
             success: function(data) {
-            	registAjaxJump(data);
-            	refreshSelected();
+                registAjaxJump(data);
+                refreshSelected();
+                registAjaxUploadFile();
+                registTimeInput();
             }
         });
         return false;
     }
     function registAjaxJump(data) {
-    	$("#content").html(data);
+        $("#content").html(data);
         $("#content a[href][href!='#']").click(function() {
             return ajaxLoadContent($(this).attr("href"));
         });
@@ -154,15 +159,52 @@ for(symbol in symbolList) {
                       $("#content").html(result);
                       registAjaxJump();
                       refreshSelected();
+                      registAjaxUploadFile();
+                      registTimeInput();
                   }
               });
             return false;
         });
     }
     function refreshSelected() {
-        $.each($("select[value]"), function(i, v) {
-            $(v).find("option[value=" + $(v).attr("value") + "]").attr("selected", "selected");
-        });
+      $.each($("select[value]"), function(i, v) {
+          $(v).find("option[value=" + $(v).attr("value") + "]").attr("selected", "selected");
+      });
+    }
+    function registAjaxUploadFile() {
+      $.each($(":file"), function(k, v) {
+          v = $(v);
+          var fileInputId = v.attr("id");//S_img 
+          var suffix = fileInputId.substr(2);//img
+          
+          v.parentsUntil(".form-group").addClass("has-feedback");
+          v.ajaxfileupload({
+              'action': '${webroot!}/upload/',
+                'validate_extensions': false,
+                'onStart': function() {
+                },
+                'onComplete': function(response) {
+                    v.after("<span id=\"" + suffix + "process\" class=\"form-control-feedback glyphicon glyphicon-ok\"></span>");
+                    v.after("<input id='imgInSession' name='" + suffix + "InSession' type='hidden' value='" + eval("response."+v.attr("name")) + "'>");
+                    v.attr("disabled", "disabled");
+                },
+                'onCancel': function() {
+                }
+          });
+      });
+    }
+    function registTimeInput() {
+      $(".form_date").attr("readonly", "readonly");
+      $(".form_date").datetimepicker({
+          format: 'yyyy-mm-dd',
+          weekStart: 1,
+          todayBtn:  1,
+          autoclose: 1,
+          todayHighlight: 1,
+          startView: 2,
+          minView: 2,
+          forceParse: 0
+      });
     }
     </script>
   </body>
