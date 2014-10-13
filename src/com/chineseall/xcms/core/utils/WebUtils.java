@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 
+import org.nutz.lang.Lang;
+
 import com.chineseall.xcms.nb.MainModule;
 
 public class WebUtils {
@@ -32,9 +34,9 @@ public class WebUtils {
         if(path.startsWith("zip")){//当class文件在war中时，此时返回zip:D:/...这样的路径
             path = path.substring(4);
         }else if(path.startsWith("file")){//当class文件在class文件中时，此时返回file:/D:/...这样的路径
-            path = path.substring(6);
+            path = path.substring(Lang.isWin() ? 6 : 5);
         }else if(path.startsWith("jar")){//当class文件在jar文件里面时，此时返回jar:file:/D:/...这样的路径
-            path = path.substring(10); 
+            path = path.substring(Lang.isWin() ? 10 : 9); 
         }
         try {
             path =  URLDecoder.decode(path, "UTF-8");

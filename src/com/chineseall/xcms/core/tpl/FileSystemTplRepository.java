@@ -7,9 +7,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.chineseall.xcms.core.utils.IOUtils;
-import com.chineseall.xcms.core.utils.StringTemplate;
-import com.chineseall.xcms.core.utils.StringTemplate.ReplaceHolder;
-import com.chineseall.xcms.core.utils.WebUtils;
 import com.chineseall.xcms.core.vo.Req;
 
 public class FileSystemTplRepository extends TplRepository {
@@ -21,15 +18,8 @@ public class FileSystemTplRepository extends TplRepository {
     
     public void init() {
         
-        rootPath = StringTemplate.compile(rootPath).replace(new ReplaceHolder() {
-            @Override
-            public String get(String key) {
-                if("web-content".equalsIgnoreCase(key))
-                    return WebUtils.getWebInfPath();
-                return null;
-            }
-        });
-        this.rootPath = rootPath.matches("[/\\\\]$") ? rootPath : rootPath + File.separator;
+        log.info(String.format("模板池路径：%s", rootPath));
+        rootPath = rootPath.matches("[/\\\\]$") ? rootPath : rootPath + File.separator;
         IOUtils.ensureDirExists(new File(this.rootPath));
     }
     
