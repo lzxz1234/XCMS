@@ -138,6 +138,7 @@ for(symbol in symbolList) {
             cache: false,
             success: function(data) {
             	registAjaxJump(data);
+            	refreshSelected();
             }
         });
         return false;
@@ -152,9 +153,15 @@ for(symbol in symbolList) {
                   success: function(result){
                       $("#content").html(result);
                       registAjaxJump();
+                      refreshSelected();
                   }
               });
             return false;
+        });
+    }
+    function refreshSelected() {
+        $.each($("select[value]"), function(i, v) {
+            $(v).find("option[value=" + $(v).attr("value") + "]").attr("selected", "selected");
         });
     }
     </script>
