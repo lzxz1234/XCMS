@@ -1,5 +1,6 @@
 package com.chineseall.xcms.nb.render;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,6 +17,12 @@ public class BeetlRender implements Render {
     private GroupTemplate group = new GroupTemplate();
     {
         group.enableNativeCall();
+    }
+    
+    public void setRootPath(String root) {
+        
+        this.group = new GroupTemplate(new File(root));
+        this.group.enableNativeCall();
     }
     
     @Override
