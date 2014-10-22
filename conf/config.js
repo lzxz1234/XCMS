@@ -23,7 +23,7 @@ var ioc={
 						create: "init",
 					},
 					fields:{
-						rootPath: "${web-content}/templates",
+						rootPath: {java: 'com.chineseall.xcms.core.utils.WebUtils.getWebInfPath("templates")'},
 						initializer: {
 							type: "com.chineseall.xcms.nb.tpl.ViewInitializer",
 						},
@@ -31,12 +31,15 @@ var ioc={
 				},
 				render: {
 					type: "com.chineseall.xcms.nb.render.BeetlRender",
+					fields:{
+						rootPath: {java: 'com.chineseall.xcms.core.utils.WebUtils.getWebInfPath("templates")'},
+					},
 				}
 			}
 		},
 		tmpFilePool : {
 		    type : 'org.nutz.filepool.NutFilePool',
-		    args : [ {java: 'com.chineseall.xcms.core.utils.WebUtils.getWebInfPath("/temp")'}, 
+		    args : [{java: 'com.chineseall.xcms.core.utils.WebUtils.getWebInfPath("temp")'}, 
 		             1000 ]
 		},
 		uploadFileContext : {
@@ -46,8 +49,8 @@ var ioc={
 		    fields : {
 		        ignoreNull : true,
 		        // 单个文件最大尺寸(大约的值，单位为字节，即 1048576 为 1M)
-		        maxFileSize : 1048576,
-		        nameFilter : '^(.+[.])(gif|jpg|png)$' 
+		        maxFileSize : 10485760,
+		        nameFilter : '^(.+[.])(.+)$' 
 		    } 
 		},
 		myUpload : {
