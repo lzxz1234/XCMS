@@ -118,10 +118,6 @@ public class NutzDao extends AbstractDao {
                         where.andEquals(key.substring(4), value);
                     else if(key.startsWith("_LK_") && value.length() > 0)
                         where.andLike(key.substring(4), value);
-                    else if(key.startsWith("_ASC_") && value.length() > 0)
-                        cnd.asc(key.substring(5));
-                    else if(key.startsWith("_DSC_") && value.length() > 0)
-                        cnd.desc(key.substring(5));
                 }
             });
         return dao.count(this.req.getEntityClass(), cnd);
