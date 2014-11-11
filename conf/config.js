@@ -14,7 +14,23 @@ var ioc={
 				daoFactory: {
 					type: "com.chineseall.xcms.core.dao.DaoFactory",
 					fields: {
-						defaultDaoClass: "com.chineseall.xcms.nb.dao.NutzDao",
+						loadList: [ {
+								type : "com.chineseall.xcms.core.dao.QuickSetDaoLoader",
+							}, {
+								type : "com.chineseall.xcms.core.dao.AnnotationDaoLoader",
+								fields: {
+									scanPackage : "com.chn.xietong"
+								},
+								events: {
+									create: "init",
+								}
+							}, {
+								type : "com.chineseall.xcms.core.dao.DefaultDaoLoader",
+								fields : {
+									defaultDaoClass : "com.chineseall.xcms.nb.dao.NutzDao",
+								}
+							}
+						]
 					}
 				},
 				tplRepository: {
