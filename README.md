@@ -41,7 +41,7 @@
 ## 系统定制 ##
 
 ### AbstractDao ###
-数据库操作实体类，部分类的数据库操作需要有单表之外的操作时，新建该类的子类并在class2dao.properties中指定映射关系即可
+数据库操作实体类，部分类的数据库操作需要有单表之外的操作时，新建该类的子类即可并用 `Dao` 注解对应的标志即可
 
 ### 系统样式 ###
 系统初次获取请求时会在 TplRepository 中创建对应操作的基本模板，如对 book 的查询操作会触发在 Repository 中创建文件 com.siwei.domain.Book/QryResult.html，进行界面微调时直接修改此处模板即可，删除操作会在下次请求到达时重新生成。
@@ -51,8 +51,6 @@
 ### 快捷更新 ###
 **自定义SQL** 支持虚拟类型以实现自定义SQL快速更新少量字段，基本配置如下：
 
-	class2Dao.properties:
-	quick-set-workflow=com.chineseall.xcms.nb.dao.QuickSetDao
 	custsql.properties:
 	quick-set-workflow=update s_resource set status = ${status} where id = ${id}
 	
