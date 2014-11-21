@@ -104,6 +104,7 @@ for(symbol in symbolList) {
         </ul>
         </div>
         <div class="col-xs-12 col-sm-9" id="content">
+            \${layoutContent !}
         </div><!--/span-->
       </div><!--/row-->
 
@@ -123,49 +124,10 @@ for(symbol in symbolList) {
     <script src="./jquery.ajaxupload.js"></script>
     <script type="text/javascript">
     $(function() {
-        $(".bs-sidenav li").click(function() {
-            $(this).siblings("li").removeClass("active");
-            $(this).addClass("active");
-        });
-        $(".bs-sidenav a[href][href!='#']").click(function() {
-            $(this).parent("li").siblings("li").removeClass("active");
-            $(this).parent("li").addClass("active");
-            return ajaxLoadContent($(this).attr("href"));
-        });
+    	refreshSelected();
+        registAjaxUploadFile();
+        registTimeInput();
     });
-    function ajaxLoadContent(url) {
-        $("#content").html("loading...");
-        $.ajax({
-            url: encodeURI(url), 
-            async: false,
-            cache: false,
-            success: function(data) {
-                registAjaxJump(data);
-                refreshSelected();
-                registAjaxUploadFile();
-                registTimeInput();
-            }
-        });
-        return false;
-    }
-    function registAjaxJump(data) {
-        $("#content").html(data);
-        $("#content a[href][href!='#']").click(function() {
-            return ajaxLoadContent($(this).attr("href"));
-        });
-        $("#content form").submit(function() {
-            $(this).ajaxSubmit({
-                  success: function(result){
-                      $("#content").html(result);
-                      registAjaxJump();
-                      refreshSelected();
-                      registAjaxUploadFile();
-                      registTimeInput();
-                  }
-              });
-            return false;
-        });
-    }
     function refreshSelected() {
       $.each($("select[value]"), function(i, v) {
           $(v).find("option[value=" + $(v).attr("value") + "]").attr("selected", "selected");

@@ -47,7 +47,7 @@ public class NutzReq extends Req {
         return result;
     }
     
-    private static class FieldInvokeDisField extends DisField {
+    public static class FieldInvokeDisField extends DisField {
 
         private final Field field;
         public FieldInvokeDisField(String disName, Field field) {

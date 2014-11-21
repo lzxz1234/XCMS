@@ -26,13 +26,14 @@ public class FileSystemTplRepository extends TplRepository {
     public String getIndexView(List<String> symbolList) {
         
         try {
-            String resourceLocation = rootPath + "index.html";
+            String identifier = "index.html";
+            String resourceLocation = rootPath + identifier;
             String result = getView(resourceLocation);
             if(isEmpty(result)) {
                 result = initializer.createIndexView(symbolList);
                 IOUtils.toFile(new File(resourceLocation), result, "UTF-8");
             }
-            return result;
+            return identifier;
         } catch (Exception e) {
             log.error("[模板操作失败]", e);
             return "";
@@ -43,7 +44,8 @@ public class FileSystemTplRepository extends TplRepository {
         
         try {
             String entityName = req.getEntityClassName();
-            String resourceLocation = rootPath + entityName + File.separator + type + ".html";
+            String identifier = entityName + File.separator + type + ".html";
+            String resourceLocation = rootPath + identifier;
             String result = getView(resourceLocation);
             if(isEmpty(result)) {
                 switch(type) {
@@ -70,7 +72,7 @@ public class FileSystemTplRepository extends TplRepository {
                 }
                 IOUtils.toFile(new File(resourceLocation), result, "UTF-8");
             }
-            return result;
+            return identifier;
         } catch (Exception e) {
             log.error("[模板操作失败]", e);
             return "";
