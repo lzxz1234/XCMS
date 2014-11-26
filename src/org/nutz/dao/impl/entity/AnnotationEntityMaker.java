@@ -46,13 +46,14 @@ import org.nutz.dao.impl.entity.macro.SqlFieldMacro;
 import org.nutz.dao.jdbc.JdbcExpert;
 import org.nutz.dao.jdbc.Jdbcs;
 import org.nutz.dao.sql.Pojo;
-import org.nutz.lang.Lang;
 import org.nutz.lang.Mirror;
 import org.nutz.lang.Strings;
 import org.nutz.lang.segment.CharSegment;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.trans.Trans;
+
+import com.chineseall.xcms.core.utils.Lang;
 
 /**
  * 根据一个 Class 对象生成 Entity 的实例

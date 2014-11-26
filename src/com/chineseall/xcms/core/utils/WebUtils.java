@@ -4,8 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 
-import org.nutz.lang.Lang;
-
 import com.chineseall.xcms.nb.MainModule;
 
 public class WebUtils {

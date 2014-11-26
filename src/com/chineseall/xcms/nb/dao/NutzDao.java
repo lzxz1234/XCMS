@@ -11,10 +11,10 @@ import org.nutz.dao.pager.Pager;
 import org.nutz.dao.util.cri.SimpleCriteria;
 import org.nutz.dao.util.cri.SqlExpressionGroup;
 import org.nutz.lang.Each;
-import org.nutz.lang.Lang;
 
 import com.chineseall.xcms.core.dao.AbstractDao;
 import com.chineseall.xcms.core.utils.Cfg;
+import com.chineseall.xcms.core.utils.Lang;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class NutzDao extends AbstractDao {

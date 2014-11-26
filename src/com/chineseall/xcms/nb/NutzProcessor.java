@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
 
 import com.chineseall.xcms.core.ClassMapper;
@@ -15,6 +14,7 @@ import com.chineseall.xcms.core.dao.DaoFactory;
 import com.chineseall.xcms.core.render.Render;
 import com.chineseall.xcms.core.tpl.TplRepository;
 import com.chineseall.xcms.core.utils.Ctx;
+import com.chineseall.xcms.core.utils.Lang;
 import com.chineseall.xcms.core.utils.Ctx.Trs;
 import com.chineseall.xcms.core.vo.Req;
 import com.chineseall.xcms.nb.vo.NutzReq;
