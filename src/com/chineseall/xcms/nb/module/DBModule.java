@@ -5,9 +5,7 @@ import java.util.Map;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.mvc.annotation.At;
-import org.nutz.mvc.annotation.GET;
 import org.nutz.mvc.annotation.Ok;
-import org.nutz.mvc.annotation.POST;
 import org.nutz.mvc.annotation.Param;
 
 import com.chineseall.xcms.nb.NutzProcessor;
@@ -19,7 +17,6 @@ public class DBModule {
     private NutzProcessor processor;
     
     @At("/get/?/?")
-    @GET
     @Ok("raw:html")
     public String get(String classSymbol, long id) throws Exception {
         
@@ -27,7 +24,6 @@ public class DBModule {
     }
     
     @At("/add-form/?")
-    @GET
     @Ok("raw:html")
     public String getAdd(String classSymbol) throws Exception {
         
@@ -35,7 +31,6 @@ public class DBModule {
     }
     
     @At("/add/?")
-    @POST
     @Ok("raw:html")
     public String doAdd(String classSymbol, @Param("..") Map<String, Object> map) 
             throws Exception {
@@ -44,7 +39,6 @@ public class DBModule {
     }
     
     @At("/mod-form/?/?")
-    @GET
     @Ok("raw:html")
     public String getMod(String classSymbol, long id) throws Exception {
         
