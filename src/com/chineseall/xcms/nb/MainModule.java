@@ -30,15 +30,8 @@ public class MainModule {
         public View match(ActionContext actionContext) {
             
             HttpServletRequest request = actionContext.getRequest();
-            StringBuilder sb = new StringBuilder();
-            sb.append(request.getScheme());
-            sb.append("://");
-            sb.append(request.getServerName());
-            sb.append(":");
-            sb.append(request.getServerPort());
-            sb.append(request.getContextPath());
             
-            Ctx.set("webroot", sb.toString());;
+            Ctx.set("webroot", request.getContextPath());
             Ctx.set("request", request);
             Ctx.set("response", actionContext.getResponse());
             return null;
