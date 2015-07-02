@@ -13,30 +13,13 @@ import org.nutz.dao.util.cri.SqlExpressionGroup;
 import org.nutz.lang.Each;
 
 import com.chineseall.xcms.core.dao.AbstractDao;
-import com.chineseall.xcms.core.utils.Cfg;
+import com.chineseall.xcms.core.utils.DataSourceUtils;
 import com.chineseall.xcms.core.utils.Lang;
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class NutzDao extends AbstractDao {
 
     private static final Logger log = Logger.getLogger(NutDao.class);
-    
-    protected static NutDao dao = new NutDao();
-    static {
-        try {
-            Cfg cfg = Cfg.getCfg("jdbc.properties");
-            if(cfg != null) {
-                ComboPooledDataSource ds = new ComboPooledDataSource();
-                ds.setDriverClass(cfg.getProperty("driverclass"));
-                ds.setJdbcUrl(cfg.getProperty("jdbcurl"));
-                ds.setUser(cfg.getProperty("username"));
-                ds.setPassword(cfg.getProperty("password"));
-                dao.setDataSource(ds);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("[jdbc.properties init error]", e);
-        }
-    }
+    protected static final NutDao dao = new NutDao(DataSourceUtils.getDataSource());
     
     @Override
     public Object get(long id) {
